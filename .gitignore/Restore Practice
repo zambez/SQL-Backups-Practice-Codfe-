@@ -1,0 +1,18 @@
+RESTORE FILELISTONLY FROM DISK = "backup location"
+
+"Shows files in the disk"
+
+RESTORE DATABASE Moviemanagement_VIDEO "New Name for database"
+FROM DISK = "c:\bu|movie_mm.bak"
+WITH move "MovieManagement" TO "c:data\mm_video.mdf", 
+MOVE "MoveManagement_Log" TO "c:\data\mm_video_log.ldf";
+
+
+BACKUP DATABASE MovieManagement_Video
+TO DISK = "c:\bu\mm_video.bak"
+WITH init;
+
+
+RESTORE DATABASE MovieManagement_VIdeo
+FROM DISK = "c:\bu|mm_video.bak"
+WITH replace
