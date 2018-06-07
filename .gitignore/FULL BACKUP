@@ -1,0 +1,51 @@
+/:    Simple FULL Backup:/
+
+BACKUP DATABASE Database_Name
+TO disk = "c:\bu\movie_mm.bak";
+
+/:    Allows us to see what's inside the database/:
+
+RESTORE HEADERONLY FROM DISK = "c:\bu\movie_mm.bak";
+
+/:    "init" command initializes the backup, prevents stacking of databases /:
+
+BACKUP DATABASE Database_Name
+TO disk = "c:\bu\movie_mm.bak";
+WITH init;
+
+/:    Complete Backup including more info. "NAME" gives backup a name /:
+
+BACKUP DATABASE Database_Name
+TO disk = "c:\bu\movie_mm.bak";
+WITH init
+NAME = "My Video Backup"
+DESCRIPTION = "This is an example backup for the video"
+
+
+"       LOG BACKUPS"
+
+BACKUP LOG DatabaseName
+TO DISK = "c:\bu\mm_log.bak"
+
+
+"      Let's modify a database, update the log, adds a new transaction into transaction log"
+
+Update dbo.Agent
+SET AgentName = "Cody Banks"
+WHERE Agent_ID = 42;
+
+
+BACKUP LOG DatabaseName
+
+RESTORE HEADERONLY FROM DISK "c:\bu\mm_log.bak"
+
+"         Let's update it again" 
+
+Update dbo.Agent
+SET AgentName = "James Bond"
+WHERE Agent_ID = 42;
+
+BACKUP LOG DatabaseName
+
+
+
